@@ -3,34 +3,41 @@
 </script>
 
 <template>
-  <div class="container mt-3 text-center">
-    <header class="container">
-    <img src="../assets/sol.png" class="sol" alt="">
-  </header>
-  <main class="row">
-    <div class="col-10 mx-auto text-center">
-      <img src="../assets/logo.jpg" alt="">
-      <img src="../assets/text-header.png" class="margin-negative" alt="">
+  <div class="teste mt-3 text-center">
+    <div>
+        <header class="container">
+        <img src="../assets/sol.png" class="sol" alt="">
+      </header>
+      <main class="mx-auto text-center">
+        <img src="../assets/logo.jpg" class="d-block logo-head mx-auto" alt="">
+        <img src="../assets/text-header.png" class="margin-negative" alt="">
+        <div class="mt-3 mx-auto">
+            <router-link to="/login" class="mt-4 btn btn-info btn-rounded">
+                Entre ou Cadastre-se
+            </router-link>
+        </div>
+      </main>
     </div>
-    <div class="col-6 mt-3 mx-auto">
-      <router-link to="/login" class="mt-4 btn btn-info btn-rounded">
-        Entre ou Cadastre-se
-      </router-link>
-    </div>
-  </main>
   </div>
 </template>
 
 <style>
-  .btn-rounded {
-    border-radius: 30px;
-    padding: .5em 2em;
+    .logo-head {
+        width: 350px;
+    }
+  div.teste {
+    min-height: 90vh;
+    min-width: 90vw;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  .margin-negative {
-    margin-top: -2em;
-  }
-  .sol {
-    width: 95px;
-    margin: 0 auto;
+
+  @media screen and (min-width:1700px) {
+    .logo-head {
+        width: auto;
+    }
   }
 </style>

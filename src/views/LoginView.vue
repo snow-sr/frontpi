@@ -3,6 +3,8 @@
 </script>
 
 <template>
+
+<div class="teste">
   <div class="container  text-center">
     <header class="container sol">
       <img src="../assets/logo.jpg" alt="">
@@ -28,9 +30,9 @@
         <div class="form-group">
           <input type="password" class="form-control btn-rounded px-4" name="password" id="password" placeholder="senha:">
         </div>
-        <button type="button" name="" id="" class="btn btn-block btn-info btn-rounded">
+        <router-link to="/blog" class="btn btn-block btn-info btn-rounded">
           Entrar
-        </button>
+        </router-link>
         <div>
           <img src="../assets/ondas.png" alt="">
         </div>
@@ -56,32 +58,19 @@
             <option>Araquari</option>
           </select>
         </div>
-        <button type="button" name="" id="" class="btn btn-block btn-dark btn-rounded">
+        <router-link to="/blog" class="btn btn-block btn-dark btn-rounded">
           Cadastrar-se
-        </button>
+        </router-link>
       </div>  
     </div>
   </main>
   </div>
+  </div>
 </template>
 
-<style>
-  .btn-rounded {
-    border-radius: 30px;
-    padding: .5em 2em;
-  }
-  .margin-negative {
-    margin-top: -2em;
-  }
+<style scoped>
   .sol {
     width: 50%;
     border-bottom: 1px solid #000;
-  }
-  .sol img {
-    width: 140px;
-    margin: 0 auto;
-  }
-  .py-10 {
-    padding: 2em 2em 15em;
   }
 </style>
