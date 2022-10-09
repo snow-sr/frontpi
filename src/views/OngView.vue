@@ -15,7 +15,6 @@ export default {
     };
   },
   async mounted() {
-    console.log();
     axios
       .get("http://localhost:8000/Ong/" + this.$route.params.id)
       .then((response) => {

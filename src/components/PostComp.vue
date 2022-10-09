@@ -38,6 +38,30 @@ export default {
         console.log(response.data);
         this.image = response.data;
       });
+
+    // pega os comentários
+    axios.get("http://localhost:8000/Comentarios/").then(async (response) => {
+      let commentsGet = response.data.filter(
+        (comment) => comment.post == this.post.id
+      );
+
+      // arruma a data dos comentários
+      await commentsGet.forEach((comment) => {
+        comment.data = dayjs(comment.data).locale(locale_pt_br).fromNow();
+      });
+
+      // arruma o autor
+      await commentsGet.forEach((comment) => {
+        axios
+          .get("http://localhost:8000/Ong/" + comment.autor)
+          .then((response) => {
+            comment.autor = response.data.name;
+          });
+      });
+
+      console.log(commentsGet);
+      this.comments = commentsGet;
+    });
   },
 };
 </script>
@@ -67,8 +91,54 @@ export default {
           </p>
           <p class="card-text pl-5"><i class="bi bi-chat"></i> 17</p>
         </div>
-        <div class="text-center font-weight-bold py-2 border-w small">
-          Ver mais..
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+        >
+          Ver mais
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModalCenter"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Comentários</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div
+            v-for="comment in comments"
+            v-bind:key="comment.id"
+            class="border border-dark rounded m-4 p-4"
+          >
+            <p>Autor: {{ comment.autor }}</p>
+            <p>{{ comment.text }}</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">
+            fazer um comentário
+          </button>
         </div>
       </div>
     </div>
