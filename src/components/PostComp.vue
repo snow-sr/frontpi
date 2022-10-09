@@ -1,5 +1,11 @@
 <script>
 import axios from "axios";
+import dayjs from "dayjs";
+import locale_pt_br from "dayjs/locale/pt-br";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
+
 export default {
   props: {
     post: {
@@ -15,6 +21,9 @@ export default {
     };
   },
   async mounted() {
+    // arruma a data do post
+    this.post.data = dayjs(this.post.data).locale(locale_pt_br).fromNow();
+    // pega as informações da ong
     axios
       .get("http://localhost:8000/Ong/" + this.post.autor)
       .then((response) => {
@@ -22,6 +31,7 @@ export default {
         this.author = response.data;
       });
 
+    // pega as informações da imagem do post
     axios
       .get("http://localhost:8000/midia/" + this.post.id)
       .then((response) => {
@@ -37,9 +47,12 @@ export default {
     <div class="card-body header pt-2 pb-2">
       <div class="logo">
         <img :src="author.image" width="80" height="80" alt="" />
-        <p class="card-text ml-2">
-          <strong>{{ author.name }}</strong>
-        </p>
+        <!-- redirect to ong page with author id as query -->
+        <router-link :to="'/ong/' + author.id">
+          <p class="card-text ml-2">
+            <strong>{{ author.name }}</strong>
+          </p>
+        </router-link>
       </div>
       <div class="vertical">
         <strong>{{ post.data }}</strong>
